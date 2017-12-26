@@ -18,13 +18,11 @@ class CController extends Controller {
     public function setAssetsBase(){
         
         $this->assets->collection('cssHeader')
-            ->addCss($this->getPathAssets('/assets/cyber/style/cyber-build.css'))
             ->addCss($this->getPathAssets('/themes/main/assets/style/theme-build.css'));
         
-        $this->assets->collection('jsFooter')
-            ->addJs($this->getPathAssets('/vendor/jquery/2.1.4/jquery.min.js'));
-        
-        /* 
+        /*
+
+        $this->assets->collection('jsFooter') ->addJs($this->getPathAssets('/vendor/jquery/2.1.4/jquery.min.js'));
          
         * =========================================================
         * Example

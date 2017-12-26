@@ -20,7 +20,7 @@ use Phalcon\Mvc\Application as WebApplication,
 
 class Application extends WebApplication {
     
-    private $config; // การตั้งค่า Config | by Object Array
+    private $config; // การตั้งค่า
     private $manager;
     
     // ทำงานอัตโนมัติ
@@ -28,7 +28,7 @@ class Application extends WebApplication {
         $this->config = new ConfigIni(APPLICATION_PATH . '/config/main.ini');   // Read the configuration
     }
     
-    /* ลงทะเบียน (Register Services)*/
+    /* ลงทะเบียน */
     private function _registerServices(){
         $debug = new ModeDebug();
         $debug->listen(Phalcon_Debug);
@@ -39,7 +39,7 @@ class Application extends WebApplication {
         $this->setDI($this->manager);
     }
     
-    /* แสดงเว็บแอพพลิเคชั่น (Run Web Application) */
+    /* แสดงเว็บแอพพลิเคชั่น */
     public function run() {
         try { 
             $this->_registerServices(); 
