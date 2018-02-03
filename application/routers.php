@@ -15,41 +15,41 @@ $manager->set('router', function() use ($config) {
     $router->setDefaultAction($config->router->actionDefault);
     $router->removeExtraSlashes(TRUE);
     
-    $router->add('/:controller/:action/:params', array(
+    $router->add('/:controller/:action/:params', [
         'controller'    => 1,
         'action'        => 2,
         'params'        => 3
-    ));
+    ]);
 
-    $router->add('/:controller/:action/', array(
+    $router->add('/:controller/:action/', [
         'controller'    => 1,
         'action'        => 2
-    ));
+    ]);
 
-    $router->add('/:controller/:action', array(
+    $router->add('/:controller/:action', [
         'controller'    => 1,
         'action'        => 2
-    ));
+    ]);
 
-    $router->add('/:controller/', array(
+    $router->add('/:controller/', [
         'controller'    => 1,
         'action'        => $config->router->actionDefault
-    ));
+    ]);
 
-    $router->add('/:controller', array(
+    $router->add('/:controller', [
         'controller'    => 1,
         'action'        => $config->router->actionDefault
-    ));
+    ]);
 
-    $router->add('/', array(
+    $router->add('/', [
         'controller'    => $config->router->controllerDefault,
         'action'        => $config->router->actionDefault
-    ));
+    ]);
         
-    $router->add('', array(
+    $router->add('', [
         'controller'    => $config->router->controllerDefault,
         'action'        => $config->router->actionDefault
-    ));
+    ]);
         
     return $router;
     

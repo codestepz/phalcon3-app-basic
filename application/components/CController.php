@@ -49,7 +49,7 @@ class CController extends Controller {
     
     /* เลือก Theme */
     protected function setTheme($theme){
-        $this->view->setLayoutsDir(sprintf('%s/%s/', $this->config->theme->themesDir, $theme)); /* ตำแหน่งเก็บไฟล์ layouts ทั้งหมด */
+        $this->view->setLayoutsDir(sprintf('%s/%s/', $this->config->theme->themesDir, $theme));
     }
     
     /* เลือก Layout */
@@ -63,7 +63,7 @@ class CController extends Controller {
     }
 
     protected function errorPage($code = 404, $message = 'Not Found !'){
-        $this->view->statusCode = array($code,$message);
+        $this->view->statusCode = [$code, $message];
         $this->setLayout('error');
     }
     

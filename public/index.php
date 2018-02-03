@@ -1,7 +1,11 @@
 <?php
 
-define('Dev_Mode', true);  // ต้องการแสดง Debug หรือไม่ (true,false)
-define('Phalcon_Debug', true);  // ต้องการแสดง Debug หรือไม่ (true,false)
+/* ============================================================
+ * Environment
+ * ============================================================ */
+
+define('Dev_Mode', true);
+define('Phalcon_Debug', true);
 
 if (Dev_Mode){
     error_reporting(-1);
@@ -18,17 +22,19 @@ use Phalcon\Mvc\Application as WebApplication,
     Phalcon\Config\Adapter\Ini as ConfigIni,
     Phalcon\Debug as ModeDebug;
 
+/* ============================================================
+ * Application
+ * ============================================================ */
+
 class Application extends WebApplication {
     
-    private $config; // การตั้งค่า
+    private $config;
     private $manager;
     
-    // ทำงานอัตโนมัติ
     public function __construct() {
-        $this->config = new ConfigIni(APPLICATION_PATH . '/config/main.ini');   // Read the configuration
+        $this->config = new ConfigIni(APPLICATION_PATH . '/config/main.ini'); // Read the configuration
     }
     
-    /* ลงทะเบียน */
     private function _registerServices(){
         $debug = new ModeDebug();
         $debug->listen(Phalcon_Debug);
@@ -39,7 +45,6 @@ class Application extends WebApplication {
         $this->setDI($this->manager);
     }
     
-    /* แสดงเว็บแอพพลิเคชั่น */
     public function run() {
         try { 
             $this->_registerServices(); 
@@ -51,7 +56,6 @@ class Application extends WebApplication {
         }
     }
     
-    /* ตรวจสอบไฟล์ */
     public function include_file($file = null){
         $pathFile = sprintf('%s/%s', APPLICATION_PATH, $file);
         if (!empty($pathFile) && file_exists($pathFile)){
@@ -64,20 +68,21 @@ class Application extends WebApplication {
     
 }
 
-/* ==================================================
- * กำหนดค่า Default (ค่าเริ่มต้น)
- * ================================================== */
+/* ============================================================
+ * Default
+ * ============================================================ */
 
-// Path Root (เริ่มต้น)
+// Path Root
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(__FILE__)));
+    define('RUNTIME_PATH', ROOT_PATH . '/runtime');
     define('APPLICATION_PATH', ROOT_PATH . '/application');
     define('IMAGE_PATH', ROOT_PATH . '/public/images');
 }
 
-/* ==================================================
- * ลงทะเบียนและแสดงเว็บแอพพลิดเคชั่นยน Web Browser
- * ================================================== */
+/* ============================================================
+ * Run Application
+ * ============================================================ */
 
 $application = new Application();
 $application->run();

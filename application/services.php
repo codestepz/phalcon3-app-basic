@@ -33,38 +33,36 @@ $manager->set('dispatcher', function () use ($manager) {
  * ================================================== */
 
 $manager->set('db', function () use ($config) {
-    return new DbAdapter(array(
+    return new DbAdapter([
         'host'      => $config->database->host,
         'username'  => $config->database->username,
         'password'  => $config->database->password,
         'dbname'    => $config->database->dbname,
-        'options'   => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $config->database->charset
-        )
-    ));
+        'options'   => [ PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $config->database->charset ]
+    ]);
 });
 
 $manager->set('view', function () use ($config) {
             
     $view = new View();
-    $view->setViewsDir(__DIR__ . '/views/'); /* ตำแหน่งเก็บไฟล์ views ทั้งหมด */
-    $view->setLayoutsDir(sprintf('%s/%s/', $config->theme->themesDir, $config->theme->themeDefault)); /* ตำแหน่งเก็บไฟล์ layouts ทั้งหมด */
-    $view->setTemplateAfter('layouts/' . $config->theme->layoutDefault); /* เลือกไฟล์ layout เริ่มต้น*/
+    $view->setViewsDir(__DIR__ . '/views/');
+    $view->setLayoutsDir(sprintf('%s/%s/', $config->theme->themesDir, $config->theme->themeDefault));
+    $view->setTemplateAfter('layouts/' . $config->theme->layoutDefault);
 
     /* สร้างโฟล์เดอร์เก็บไฟล์ cache */
-    $cacheDir = sprintf('%s/%s/', APPLICATION_PATH, $config->application->cacheDir);
-    if (!is_dir($cacheDir)) { mkdir($cacheDir); }
+    // $cacheDir = sprintf('%s/%s/', RUNTIME_PATH, $config->application->cacheDir);
+    // if (!is_dir($cacheDir)) { mkdir($cacheDir); }
 
-    $view->registerEngines(array(
+    $view->registerEngines([
         '.phtml' => function ($view, $di){
             $volt = new VoltEngine($view, $di);
-            $volt->setOptions(array(
-                'compiledPath' => sprintf('%s/%s/', APPLICATION_PATH, $config->application->cacheDir),
+            $volt->setOptions([
+                'compiledPath' => sprintf('%s/%s/caches/', RUNTIME_PATH, $config->application->cacheDir),
                 'compiledSeparator' => '_'
-            ));
+            ]);
             return $volt;
         },
-    ));
+    ]);
 
     return $view;
 
