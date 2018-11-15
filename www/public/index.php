@@ -84,5 +84,7 @@ if (!defined('ROOT_PATH')) {
  * Run Application
  * ============================================================ */
 
+include_once dirname(dirname(__FILE__)) . "/vendor/autoload.php";
+
 $application = new Application();
 $application->run();
