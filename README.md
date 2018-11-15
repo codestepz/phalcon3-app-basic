@@ -40,19 +40,11 @@ mv composer /usr/local/bin/composer
 php -r "unlink('composer-setup.php');"
 ```
 
-
-Install LEMP (Linux-Nginx-MariaDB-Php7)
+Start Service | Phalcon Application Template
 ---------------------------------------------------
 
 ```
 sudo git clone https://github.com/codestepz/phalcon3-app-template.git
-```
-
-
-Run Container | Phalcon Application Template
----------------------------------------------------
-
-```
 sudo docker-compose -f phalcon3-app-template/docker-compose.yml up -d
 chmod 0777 -R phalcon3-app-template/www/runtime
 ```
