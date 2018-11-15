@@ -38,9 +38,7 @@ chmod 0777 -R phalcon3-app-template/www/runtime
 ```
 
 ```
-http://[IP ADDRESS] << Phalcon. Nginx v1.15.4-alpine
+http://[IP ADDRESS] << Nginx v1.15.4-alpine
 
-http://[IP ADDRESS]/info.php << Demo. PHP v7.2.10 (FPM) 
-
-http://[IP ADDRESS]:8080 << Demo. PhpMyAdmin v4.8.3
+http://[IP ADDRESS]/info.php << PHP v7.2.10 (FPM) 
 ```
